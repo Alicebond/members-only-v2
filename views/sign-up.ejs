@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <h1>Create an Account</h1>
+    <form action="/sign-up" method="post">
+      <p>
+        <label for="firstname">First Name:</label>
+        <input type="text" name="firstname" id="firstname" />
+      </p>
+      <p>
+        <label for="lastname">Last Name:</label>
+        <input type="text" name="lastname" id="lastname" />
+      </p>
+      <p>
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" id="email" />
+      </p>
+      <fieldset>
+        <legend>Do you want to become a member?</legend>
+        <p>
+          <input type="radio" name="member" id="member1" value="true" checked />
+          <label for="member1"
+            >Yes, you can view posts and their at the same time.</label
+          >
+        </p>
+        <p>
+          <input type="radio" name="member" id="member2" value="true" />
+          <label for="member2"
+            >No, you can only see posts, authors of posts will stay
+            anonymous</label
+          >
+        </p>
+      </fieldset>
+      <p>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+      </p>
+      <p>
+        <button type="submit">Submit</button>
+      </p>
+    </form>
+  </body>
+</html>
