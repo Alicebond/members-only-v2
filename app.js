@@ -4,14 +4,18 @@ const passport = require("passport");
 const path = require("node:path");
 const router = require("./routes/index");
 const pgPool = require("./db/pool");
+const pgSession = require("connect-pg-simple")(session);
 
 const app = express();
-const pgSession = require("connect-pg-simple")(session);
-const assetsPath = path.join(__dirname, "public");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+// Parse form data into req.body
+app.use(express.urlencoded({ extended: true }));
+require("./passport");
 app.use(
   session({
     store: new pgSession({
@@ -22,16 +26,24 @@ app.use(
     secret: "bird",
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+    cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 days
   })
 );
+
 app.use(passport.session());
-app.use(express.static(assetsPath));
 
-// Parse form data into req.body
-app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
-app.use("/", router);
+app.use(router);
+
+// app.use((req, res, next) => {
+//   console.log(req.session);
+//   console.log(req.user);
+//   next();
+// });
 
 app.use((err, req, res, next) => {
   console.error(err);

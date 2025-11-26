@@ -6,23 +6,16 @@
     <title>Members</title>
   </head>
   <body>
-    <h1>Welcom to the Club!</h1>
+    <% if (locals.user) {%>
+    <h1>Welcome back <%= user.username %></h1>
+    <a href="/logout">Log Out</a>
+    <% } else {%>
+    <h1>Welcome to the Club!</h1>
     <p>
-      Please log in first, if you don't have an account, please click
-      <a href="/sign-up">here</a> to create one.
+      Please <a href="/login">log in</a> first, if you don't have an account,
+      please click <a href="/signup">here</a> to create one.
     </p>
-    <form action="/log-in" method="POST">
-      <p>
-        <label for="email">E-mail: </label>
-        <input type="email" name="email" id="email" />
-      </p>
-      <p>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" />
-      </p>
-      <p>
-        <button type="submit">Log In</button>
-      </p>
-    </form>
+    <% } %>
+    <h3>This page has been viewed <%- views %> times</h3>
   </body>
 </html>
