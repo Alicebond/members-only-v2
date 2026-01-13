@@ -6,16 +6,23 @@
     <title>Members</title>
   </head>
   <body>
-    <% if (locals.user) {%>
-    <h1>Welcome back <%= user.username %></h1>
-    <a href="/logout">Log Out</a>
-    <% } else {%>
+    <% if (user.is_member) {%>
+    <h1>Welcome back <%= user.full_name %></h1>
+    <a href="/logout">Log Out</a> <a href="/add-msg">Make a Post</a>
+    <% if (data) { %> <% for (let i = 0; i < data.length; i++ ) { %>
+    <div class="msg-card">
+      <h3><%= data[i].title %></h3>
+      <p><%= data[i].content %></p>
+      <p><%= data[i].full_name %></p>
+    </div>
+    <% } %> <%} else {%>
+    <p>Make a post <a href="/add-msg">here</a></p>
+    <% } %> <% } else {%>
     <h1>Welcome to the Club!</h1>
     <p>
       Please <a href="/login">log in</a> first, if you don't have an account,
       please click <a href="/signup">here</a> to create one.
     </p>
     <% } %>
-    <h3>This page has been viewed <%- views %> times</h3>
   </body>
 </html>

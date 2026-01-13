@@ -3,24 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
     <title>Sign Up</title>
   </head>
   <body>
-    <h1>Create an Account</h1>
+    <h1><a href="/">Club</a></h1>
+    <h2>Create an Account</h2>
     <form action="/signup" method="POST">
-      <p>
-        <label for="firstname">First Name:</label>
-        <input type="text" name="firstname" id="firstname" />
-      </p>
-      <p>
-        <label for="lastname">Last Name:</label>
-        <input type="text" name="lastname" id="lastname" />
-      </p>
-      <p>
-        <label for="email">E-mail:</label>
-        <input type="email" name="email" id="email" />
-      </p>
-      <fieldset>
+      <div class="form-control">
+        <p><label for="firstname">First Name:</label></p>
+        <p><input type="text" name="firstname" id="firstname" /></p>
+      </div>
+      <div class="form-control">
+        <p><label for="lastname">Last Name:</label></p>
+        <p><input type="text" name="lastname" id="lastname" /></p>
+      </div>
+      <div class="form-control">
+        <p><label for="email">E-mail:</label></p>
+        <p><input type="email" name="email" id="email" /></p>
+      </div>
+      <div class="form-control">
+        <p><label for="password">Password</label></p>
+        <p><input type="password" name="password" id="password" /></p>
+      </div>
+      <div class="form-control">
+        <p><label for="confirm-pwd">Confirm Password</label></p>
+        <p><input type="password" name="confirm-pwd" id="confirm-pwd" /></p>
+      </div>
+      <fieldset class="form-control">
         <legend>Do you want to become a member?</legend>
         <p>
           <input type="radio" name="member" id="member1" value="true" checked />
@@ -36,13 +46,10 @@
           >
         </p>
       </fieldset>
-      <p>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" />
-      </p>
-      <p>
-        <button type="submit">Submit</button>
-      </p>
+      <p><button type="submit">Submit</button></p>
     </form>
   </body>
 </html>
+<!-- 
+<div class="form-control"></div>
+-->

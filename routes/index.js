@@ -1,16 +1,12 @@
 const express = require("express");
 const userController = require("../controllers/userController");
-// const msgController = require("../controllers/msgController");
+const msgController = require("../controllers/msgController");
 const router = express.Router();
 const passport = require("passport");
+const isAuth = require("./authMiddleware").isAuth;
 
 /// User routes
-router.get("/", (req, res, next) => {
-  if (req.session.views) req.session.views++;
-  else req.session.views = 1;
-
-  res.render("index", { views: req.session.views, user: req.user });
-});
+router.get("/", msgController.index);
 router.get("/login", userController.userLoginGet);
 router.post(
   "/login",
@@ -28,14 +24,12 @@ router.get("/logout", (req, res, next) => {
 router.get("/signup", userController.userAddGet);
 router.post("/signup", userController.userAddPost);
 
-router.get("/login-success", (req, res, next) => {
-  res.send("<p>You successfully logged in!<p>");
-});
-
-router.get("/login-failure", (req, res, next) => {
-  res.send("<p>Something Went Wrong<p>");
+router.get("/protected-route", isAuth, (req, res, next) => {
+  res.send("You made it to the route");
 });
 
 /// Msg routes
+router.get("/add-msg", msgController.msgAddGet);
+router.post("/add-msg", msgController.msgAddPost);
 
 module.exports = router;

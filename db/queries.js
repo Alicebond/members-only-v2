@@ -15,6 +15,50 @@ async function addNewUser(userInfo) {
   );
 }
 
+async function getAllMsg() {
+  const { rows } = await pool.query(`SELECT * FROM message`);
+  return rows[0];
+}
+
+async function getAllData() {
+  const { rows } = await pool.query(
+    `SELECT message.title, message.content, message.timestamp, users.full_name
+    FROM message, users WHERE message.user_id = users.id
+    ORDER BY message.timestamp DESC;`
+  );
+
+  return rows;
+}
+
+async function getAllUser() {
+  const { rows } = await pool.query(`SELECT * FROM users`);
+  return rows[0];
+}
+
+async function addNewMsg({ title, msg, userId }) {
+  await pool.query(
+    `INSERT INTO message(title, content, user_id) 
+    VALUES ($1, $2, $3)`,
+    [title, msg, userId]
+  );
+}
+
+async function getMsger(id) {
+  const { row } = await pool.query(
+    `
+    SELECT * FROM users WHERE id = $1
+    `,
+    [id]
+  );
+
+  return row[0];
+}
+
 module.exports = {
   addNewUser,
+  addNewMsg,
+  getAllMsg,
+  getAllUser,
+  getAllData,
+  getMsger,
 };

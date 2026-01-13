@@ -1,0 +1,11 @@
+.form-control {
+  margin-bottom: 18px;
+}
+
+.form-control p {
+  margin: 0;
+}
+
+fieldset {
+  display: inline-block;
+}

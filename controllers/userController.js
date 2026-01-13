@@ -3,13 +3,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 
 exports.userLoginGet = asyncHandler((req, res, next) => {
-  // console.log(req.session);
-
   res.render("login");
-});
-exports.userLoginPost = asyncHandler((req, res, next) => {
-  const inputName = req.username,
-    inputPwd = req.password;
 });
 
 exports.userAddGet = asyncHandler((req, res) => res.render("signup"));

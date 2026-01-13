@@ -4,29 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
-    <title>Log In</title>
+    <title>Club</title>
   </head>
   <body>
     <h1><a href="/">Club</a></h1>
-    <form action="/login" method="POST">
+    <h2>Make a Post</h2>
+    <form action="/add-msg" method="post">
       <div class="form-control">
         <p>
-          <label for="email">E-mail: </label>
+          <label for="title">Title:</label>
         </p>
         <p>
-          <input type="email" name="email" id="email" />
+          <input type="text" name="title" id="title" />
         </p>
       </div>
       <div class="form-control">
         <p>
-          <label for="password">Password:</label>
+          <label for="msg">Content:</label>
         </p>
         <p>
-          <input type="password" name="password" id="password" />
+          <textarea name="msg" id="msg" rows="5" cols="33"></textarea>
         </p>
       </div>
-
-      <button type="submit">Log In</button>
+      <button type="submit">Submit</button>
     </form>
   </body>
 </html>
