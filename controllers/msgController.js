@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
+const { body, validationResult } = require("express-validator");
 
 exports.index = asyncHandler(async (req, res, next) => {
   const user = req.user;
@@ -15,13 +16,31 @@ exports.index = asyncHandler(async (req, res, next) => {
 });
 
 exports.msgAddGet = asyncHandler(async (req, res, next) => {
-  res.render("msgForm");
+  res.render("msgForm", { msgInfo: false, errors: false });
 });
 
-exports.msgAddPost = asyncHandler(async (req, res, next) => {
-  const msg = req.body.msg;
-  const userId = req.user.id;
-  const title = req.body.title;
-  await db.addNewMsg({ title, msg, userId });
-  res.redirect("/");
-});
+exports.msgAddPost = [
+  body("title").trim().escape(),
+  body("msg")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Post must not be empty."),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const msgInfo = {
+      title: req.body.title,
+      msg: req.body.msg,
+      userId: req.user.id,
+    };
+
+    if (!errors.isEmpty()) {
+      res.render("msgForm", { msgInfo, errors: errors.array() });
+    } else {
+      await db.addNewMsg(msgInfo);
+      res.redirect("/");
+    }
+  }),
+];

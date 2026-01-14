@@ -12,23 +12,47 @@
     <form action="/signup" method="POST">
       <div class="form-control">
         <p><label for="firstname">First Name:</label></p>
-        <p><input type="text" name="firstname" id="firstname" /></p>
+        <p>
+          <input
+            type="text"
+            name="firstname"
+            id="firstname"
+            value="<%= userInfo.firstname || '' %>"
+          />
+        </p>
       </div>
       <div class="form-control">
         <p><label for="lastname">Last Name:</label></p>
-        <p><input type="text" name="lastname" id="lastname" /></p>
+        <p>
+          <input
+            type="text"
+            name="lastname"
+            id="lastname"
+            value="<%= userInfo.lastname || '' %>"
+          />
+        </p>
       </div>
       <div class="form-control">
         <p><label for="email">E-mail:</label></p>
-        <p><input type="email" name="email" id="email" /></p>
+        <p>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value="<%= userInfo.email || '' %>"
+          />
+        </p>
       </div>
       <div class="form-control">
         <p><label for="password">Password</label></p>
-        <p><input type="password" name="password" id="password" /></p>
-      </div>
-      <div class="form-control">
-        <p><label for="confirm-pwd">Confirm Password</label></p>
-        <p><input type="password" name="confirm-pwd" id="confirm-pwd" /></p>
+        <p>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value="<%= userInfo.password || '' %>"
+          />
+        </p>
       </div>
       <fieldset class="form-control">
         <legend>Do you want to become a member?</legend>
@@ -48,8 +72,12 @@
       </fieldset>
       <p><button type="submit">Submit</button></p>
     </form>
+    <% if(errors) {%>
+    <ul>
+      <% errors.forEach(error => { %>
+      <li class="error"><%= error.msg %></li>
+      <% }); %>
+    </ul>
+    <% } %>
   </body>
 </html>
-<!-- 
-<div class="form-control"></div>
--->

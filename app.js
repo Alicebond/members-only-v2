@@ -39,11 +39,11 @@ app.use((req, res, next) => {
 
 app.use(router);
 
-app.use((req, res, next) => {
-  console.log(req.session);
-  console.log(req.user);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(req.session);
+//   console.log(req.user);
+//   next();
+// });
 
 app.use((err, req, res, next) => {
   console.error(err);

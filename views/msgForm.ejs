@@ -15,7 +15,8 @@
           <label for="title">Title:</label>
         </p>
         <p>
-          <input type="text" name="title" id="title" />
+          <input type="text" name="title" id="title" value="<%= msgInfo.title ||
+          "" %>"/>
         </p>
       </div>
       <div class="form-control">
@@ -23,10 +24,19 @@
           <label for="msg">Content:</label>
         </p>
         <p>
-          <textarea name="msg" id="msg" rows="5" cols="33"></textarea>
+          <textarea name="msg" id="msg" rows="5" cols="33">
+<%= msgInfo.msg || "" %></textarea
+          >
         </p>
       </div>
       <button type="submit">Submit</button>
     </form>
+    <% if(errors) {%>
+    <ul>
+      <% errors.forEach(error => { %>
+      <li class="error"><%= error.msg %></li>
+      <% }); %>
+    </ul>
+    <% } %>
   </body>
 </html>
